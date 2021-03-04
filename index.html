@@ -4,14 +4,31 @@
     <meta charset="UTF-8" />
     <title>Vue Mastery</title>
     <!-- Import Styles -->
-    <link rel="stylesheet" href="./assets/styles.css" />
+    <link rel="stylesheet" href="./assets/styles/styles.css" />
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
   </head>
   <body>
     <div id="app">
-      <h1>{{ product }}</h1>
-      <p>Description: {{ description }}</p>
+    <div class="nav-bar"></div>
+      <div class="product-display">
+        <div class="product-container">
+            <div class="product-image">
+                <a :href="shopLinkUrl">
+                    <img :src="imageUrl">
+                </a>
+            </div>
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p>Description: {{ description }}</p>
+                <p v-if="onSale"><b>On Sale!</b></p>
+                <p>Stock: 
+                  <span v-if="inventory > 20">In Stock</span>
+                  <span v-else-if="inventory <= 20 && inventory > 0">Low Stock!</span>
+                  <span v-else>Out Of Stock</span>
+                </p>
+            </div>
+        </div>
     </div>
 
     <!-- Import Vue App -->
@@ -23,3 +40,4 @@
     </script>
   </body>
 </html>
+

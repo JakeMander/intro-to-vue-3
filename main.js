@@ -4,7 +4,11 @@ const app = Vue.createApp(
         data() {
             return {
                 product: 'Socks',
-                description: 'A lovely pair of socks.'
+                description: 'A lovely pair of socks.',
+                imageUrl: "./assets/images/socks_green.jpg",
+                shopLinkUrl: "https://www.sockshop.co.uk/",
+                onSale: true,
+                inventory: 0
             }
         }
     }
