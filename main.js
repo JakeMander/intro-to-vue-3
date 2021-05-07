@@ -19,17 +19,22 @@ const app = Vue.createApp({
         },
         methods: {
             addToCart() {
-                this.cartItems += 1;
+                if (this.inventory > 0) {
+                    this.cartItems += 1;
+                    this.inventory -= 1;
+                }
             },
             removeFromCart() {
                 cartItems = this.cartItems;
                 
-                if (cartItems > 0)
+                if (this.cartItems > 0){
                     this.cartItems -= 1;
+                    this.inventory += 1;
+                }
             },
             updateImage(newUrl) {
                 this.imageUrl = newUrl;
-            }
+            },
         }
     }
 )

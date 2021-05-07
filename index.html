@@ -35,9 +35,16 @@
                   <li v-for="detail in details">{{detail}}</li>
                 </ul>
                 <ul>
-                  <div v-for="variant in variants" @mouseover="updateImage(variant.imageUrl)" :key=variant.id> {{variant.colour}}</div>
+                  <div v-for="variant in variants" 
+                  @mouseover="updateImage(variant.imageUrl)" 
+                  :key=variant.id
+                  :style="{backgroundColor: variant.colour}"
+                  class="color-circle">
+                </div>
                 </ul>
-                <button class="button" @click="addToCart">Add To Cart</button>
+                <button class="button" 
+                :class="{ disabledButton: !(inventory > 0) }"
+                @click="addToCart">Add To Cart</button>
                 <button class="button" @click="removeFromCart">Remove From Cart</button>
             </div>
         </div>
