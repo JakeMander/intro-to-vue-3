@@ -11,21 +11,21 @@
   <body>
     <div id="app">
     <div class="nav-bar"></div>
-    <div class="cart">Cart({{ cartItems }})</div>
+    <div class="cart">Cart({{ totalItemsInCart }})</div>
       <div class="product-display">
         <div class="product-container">
             <div class="product-image">
                 <a :href="shopLinkUrl">
-                    <img :src="imageUrl">
+                    <img :src="currentImage">
                 </a>
             </div>
             <div class="product-info">
-                <h1>{{ product }}</h1>
+                <h1>{{ title }}</h1>
                 <p>Description: {{ description }}</p>
                 <p v-if="onSale"><b>On Sale!</b></p>
                 <p>Stock: 
-                  <span v-if="inventory > 20">In Stock</span>
-                  <span v-else-if="inventory <= 20 && inventory > 0">Low Stock!</span>
+                  <span v-if="currentQuantity > 20">In Stock</span>
+                  <span v-else-if="currentQuantity <= 20 && currentQuantity > 0">Low Stock!</span>
                   <span v-else>Out Of Stock</span>
                 </p>
                 <ul>
@@ -35,15 +35,15 @@
                   <li v-for="detail in details">{{detail}}</li>
                 </ul>
                 <ul>
-                  <div v-for="variant in variants" 
-                  @mouseover="updateImage(variant.imageUrl)" 
+                  <div v-for="(variant, index) in variants" 
+                  @mouseover="updateVariant(index)" 
                   :key=variant.id
                   :style="{backgroundColor: variant.colour}"
                   class="color-circle">
                 </div>
                 </ul>
                 <button class="button" 
-                :class="{ disabledButton: !(inventory > 0) }"
+                :class="{ disabledButton: !(currentQuantity > 0) }"
                 @click="addToCart">Add To Cart</button>
                 <button class="button" @click="removeFromCart">Remove From Cart</button>
             </div>
