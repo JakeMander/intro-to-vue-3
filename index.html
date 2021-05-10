@@ -12,46 +12,14 @@
     <div id="app">
     <div class="nav-bar"></div>
     <div class="cart">Cart({{ totalItemsInCart }})</div>
-      <div class="product-display">
-        <div class="product-container">
-            <div class="product-image">
-                <a :href="shopLinkUrl">
-                    <img :src="currentImage">
-                </a>
-            </div>
-            <div class="product-info">
-                <h1>{{ title }}</h1>
-                <p>Description: {{ description }}</p>
-                <p v-if="onSale"><b>On Sale!</b></p>
-                <p>Stock: 
-                  <span v-if="currentQuantity > 20">In Stock</span>
-                  <span v-else-if="currentQuantity <= 20 && currentQuantity > 0">Low Stock!</span>
-                  <span v-else>Out Of Stock</span>
-                </p>
-                <ul>
-                  <li v-for="size in sizes">{{size}}</li>
-                </ul>
-                <ul>
-                  <li v-for="detail in details">{{detail}}</li>
-                </ul>
-                <ul>
-                  <div v-for="(variant, index) in variants" 
-                  @mouseover="updateVariant(index)" 
-                  :key=variant.id
-                  :style="{backgroundColor: variant.colour}"
-                  class="color-circle">
-                </div>
-                </ul>
-                <button class="button" 
-                :class="{ disabledButton: !(currentQuantity > 0) }"
-                @click="addToCart">Add To Cart</button>
-                <button class="button" @click="removeFromCart">Remove From Cart</button>
-            </div>
-        </div>
-    </div>
+    <p>{{premium}}</p>
+    <product-display :premium="premium"></product-display>
+    
 
     <!-- Import Vue App -->
     <script src="./main.js"></script>
+    <!-- Import Product Display Component -->
+    <script src = "./components/productDisplay.js"></script>
 
     <!-- Mount Vue App-->
     <script>
