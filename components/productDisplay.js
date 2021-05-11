@@ -1,4 +1,4 @@
-app.component("product-display", {
+app.component('product-display', {
   props: {
     premium: {
       type: Boolean,
@@ -46,6 +46,7 @@ app.component("product-display", {
             </div>
         </div>
     </div>
+
 `,
   data() {
     return {
@@ -62,32 +63,36 @@ app.component("product-display", {
           id: 2234,
           colour: "Green",
           imageUrl: ".\\assets\\images\\socks_green.jpg",
-          quantity: "70",
-          itemsInCart: 0,
+          quantity: 70,
+          itemsInCart: 0
         },
         {
           id: 2235,
           colour: "Blue",
           imageUrl: ".\\assets\\images\\socks_blue.jpg",
-          quantity: "0",
-          itemsInCart: 0,
+          quantity: 5,
+          itemsInCart: 0
         },
       ],
     };
   },
   methods: {
     addToCart() {
-      if (this.variants[this.selectedVariant].quantity > 0) {
-        this.variants[this.selectedVariant].itemsInCart += 1;
-        this.variants[this.selectedVariant].quantity -= 1;
+      // console.log(this);
+      let sock = this.variants[this.selectedVariant];
+      if (sock.quantity > 0) {
+        sock.itemsInCart += 1;
+        sock.quantity -= 1;
       }
+      this.$emit('add-to-cart', sock.id);
     },
     removeFromCart() {
-      cartItems = this.cartItems;
+      let sock = this.variants[this.selectedVariant];
 
-      if (this.variants[this.selectedVariant].itemsInCart > 0) {
-        this.variants[this.selectedVariant].itemsInCart -= 1;
-        this.variants[this.selectedVariant].quantity += 1;
+      if (sock.itemsInCart > 0) {
+        sock.itemsInCart -= 1;
+        sock.quantity += 1;
+        this.$emit('remove-from-cart', sock.id);
       }
     },
     updateImage(newUrl) {
