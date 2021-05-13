@@ -45,6 +45,8 @@ app.component('product-display', {
                 <button class="button" @click="removeFromCart">Remove From Cart</button>
             </div>
         </div>
+        <review-list v-if="reviews.length":reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
     </div>
 
 `,
@@ -56,6 +58,7 @@ app.component('product-display', {
       selectedVariant: 0,
       onSale: true,
       product: "Socks",
+      reviews: [],
       shopLinkUrl: "https://www.sockshop.co.uk/",
       sizes: ["Small", "Medium", "Large"],
       variants: [
@@ -102,6 +105,10 @@ app.component('product-display', {
     updateVariant(index) {
       this.selectedVariant = index;
     },
+    addReview(review) {
+      this.reviews.push(review);
+      console.log(this.reviews);
+    }
   },
   computed: {
     title() {
